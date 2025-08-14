@@ -3,31 +3,60 @@
 @section('title', 'Login')
 
 @section('content')
-<div class="container mt-5" style="max-width: 500px;">
-    <h2 class="text-center mb-4">🔐 Login</h2>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h4 class="mb-0 fw-bold text-dark">🔐 Login</h4>
+                    <p class="text-muted mb-0">Masuk ke akun Anda</p>
+                </div>
 
-    @if(session('error'))
-        <div class="alert alert-danger text-center">{{ session('error') }}</div>
-    @endif
+                <div class="card-body p-4">
+                    @if(session('error'))
+                        <div class="alert alert-danger d-flex align-items-center">
+                            <i class="bi bi-exclamation-circle me-2"></i>
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="email" required value="{{ old('email') }}">
+                        <div class="mb-4">
+                            <label for="email" class="form-label fw-medium">Email</label>
+                            <input type="email" 
+                                   name="email" 
+                                   id="email"
+                                   class="form-control form-control-lg"
+                                   value="{{ old('email') }}" 
+                                   placeholder="Masukkan email"
+                                   required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label fw-medium">Password</label>
+                            <input type="password" 
+                                   name="password" 
+                                   id="password"
+                                   class="form-control form-control-lg"
+                                   placeholder="Masukkan password"
+                                   required>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="{{ route('register') }}">Belum punya akun? <strong>Daftar</strong></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="password" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100">Login</button>
-
-        <div class="text-center mt-3">
-            <a href="{{ route('register') }}">Belum punya akun? Daftar</a>
-        </div>
-    </form>
+    </div>
 </div>
 @endsection
