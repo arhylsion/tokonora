@@ -47,6 +47,20 @@
             @foreach ($produk as $p)
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100">
+                        
+                        {{-- Gambar produk --}}
+                        @if($p->image)
+                            <img src="{{ asset('storage/produk/' . $p->image) }}" 
+                                 class="card-img-top" 
+                                 alt="{{ $p->nama }}"
+                                 style="height: 200px; object-fit: cover;">
+                        @else
+                            <img src="https://via.placeholder.com/400x200?text=No+Image" 
+                                 class="card-img-top" 
+                                 alt="No Image"
+                                 style="height: 200px; object-fit: cover;">
+                        @endif
+
                         <div class="card-body d-flex flex-column">
                             <div class="mb-3">
                                 <h5 class="card-title fw-bold mb-2">{{ $p->nama }}</h5>

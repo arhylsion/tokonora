@@ -23,40 +23,50 @@
 
                 <div class="card-body p-4">
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-exclamation-circle me-2"></i>
-                                <strong>Please fix the following errors:</strong>
-                            </div>
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                    <div class="alert alert-danger">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-exclamation-circle me-2"></i>
+                            <strong>Please fix the following errors:</strong>
                         </div>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
 
-                    <form action="{{ route('produk.store') }}" method="POST">
+                    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        
+
                         <div class="mb-4">
                             <label for="nama" class="form-label fw-medium">Product Name</label>
-                            <input type="text" 
-                                   name="nama" 
-                                   class="form-control form-control-lg" 
-                                   id="nama" 
-                                   value="{{ old('nama') }}" 
-                                   placeholder="Enter product name"
-                                   required>
+                            <input type="text"
+                                name="nama"
+                                class="form-control form-control-lg"
+                                id="nama"
+                                value="{{ old('nama') }}"
+                                placeholder="Enter product name"
+                                required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="image" class="form-label fw-medium">Product Image</label>
+                            <input type="file" name="image" id="image" class="form-control">
+                            @if(isset($produk) && $produk->image)
+                            <div class="mt-2">
+                                <img src="{{ asset('storage/' . $produk->image) }}" alt="Product Image" class="img-thumbnail" style="max-height: 150px;">
+                            </div>
+                            @endif
                         </div>
 
                         <div class="mb-4">
                             <label for="deskripsi" class="form-label fw-medium">Description</label>
-                            <textarea name="deskripsi" 
-                                      class="form-control" 
-                                      id="deskripsi" 
-                                      rows="4" 
-                                      placeholder="Describe your product (optional)">{{ old('deskripsi') }}</textarea>
+                            <textarea name="deskripsi"
+                                class="form-control"
+                                id="deskripsi"
+                                rows="4"
+                                placeholder="Describe your product (optional)">{{ old('deskripsi') }}</textarea>
                         </div>
 
                         <div class="row">
@@ -64,27 +74,27 @@
                                 <label for="harga" class="form-label fw-medium">Price</label>
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text bg-light">Rp</span>
-                                    <input type="number" 
-                                           name="harga" 
-                                           class="form-control" 
-                                           id="harga" 
-                                           value="{{ old('harga') }}" 
-                                           placeholder="0"
-                                           min="0"
-                                           required>
+                                    <input type="number"
+                                        name="harga"
+                                        class="form-control"
+                                        id="harga"
+                                        value="{{ old('harga') }}"
+                                        placeholder="0"
+                                        min="0"
+                                        required>
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-4">
                                 <label for="stok" class="form-label fw-medium">Stock</label>
-                                <input type="number" 
-                                       name="stok" 
-                                       class="form-control form-control-lg" 
-                                       id="stok" 
-                                       value="{{ old('stok') }}" 
-                                       placeholder="0"
-                                       min="0"
-                                       required>
+                                <input type="number"
+                                    name="stok"
+                                    class="form-control form-control-lg"
+                                    id="stok"
+                                    value="{{ old('stok') }}"
+                                    placeholder="0"
+                                    min="0"
+                                    required>
                             </div>
                         </div>
 
